@@ -13,13 +13,12 @@ export default {
 
   data() {
     return {
-      editId: '',
-      editMsg: '',
+      lastEdited: '',
       isDisabled: true,
     };
   },
 
-  emits: ['edit-todo'],
+  emits: ['delete-todo', 'update-todo', 'edit-todo'],
 
   // 부모 컴포넌트와 통신하기 위한 함수 정의
   methods: {
@@ -30,17 +29,13 @@ export default {
     updateTodo(id) {
       this.$emit('update-todo', id);
     },
+
     editTodo(id, msg) {
-      alert('수정 완료');
-      console.log(id);
-      console.log(this.editMsg);
-      this.editId = id;
-      this.editMsg = msg;
-
-      this.$emit('edit-todo', this.editId, this.editMsg);
-
-      this.editId = '';
-      this.editMsg = '';
+      if (!this.isDisabled) {
+        this.$emit('edit-todo', id, msg);
+        this.lastEdited = msg;
+      }
+      this.isDisabled = !this.isDisabled;
     },
   },
 };
@@ -73,8 +68,9 @@ export default {
       <input
         type="text"
         v-model="item.msg"
+        :disabled="this.isDisabled"
         class="todo__item-text"
-        @click="!this.isDisabled"
+        @keydown.enter="editTodo(item.id, item.msg)"
       />
 
       <!-- 리스트에 출력된 todo를 삭제하는 버튼 -->

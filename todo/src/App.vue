@@ -13,10 +13,8 @@ export default {
   // todoInput으로부터 수신한 todo 메시지를 저장
   data() {
     return {
-      todo: [], // todoInput으로부터 수신한 데이터를 저장할 todo 리스트
+      todo: JSON.parse(localStorage.getItem('todo')) || [], // todoInput으로부터 수신한 데이터를 저장할 todo 리스트
       current: 'all', // todoHeader로부터 수신한 tab값을 저장
-      editMsg: '',
-      editId: '',
     };
   },
 
@@ -32,6 +30,7 @@ export default {
       };
       console.log(item);
       this.todo.push(item); // 작성한 todo(item)은 리스트에 저장
+      localStorage.setItem('todo', JSON.stringify(this.todo));
     },
 
     // todoHeader로부터 전달받은 값에 따라 다른 탭을 출력
@@ -43,6 +42,7 @@ export default {
     deleteTodo(id) {
       console.log(id);
       this.todo = this.todo.filter((v) => v.id !== id);
+      localStorage.setItem('todo', JSON.stringify(this.todo));
     },
 
     updateTodo(id) {
@@ -51,19 +51,14 @@ export default {
         // 지정한 id에 관한 completed 속성값 변경
         v.id === id ? { ...v, completed: !v.completed } : v
       );
+      localStorage.setItem('todo', JSON.stringify(this.todo));
     },
 
     editTodo(editId, editMsg) {
-      this.editId = editId;
-      this.editMsg = editMsg;
-      console.log(this.editId);
-      console.log(this.editMsg);
-
       this.todo = this.todo.map((v) =>
-        v.id == this.editId ? { ...v, msg: this.editMsg } : v
+        v.id == editId ? { ...v, msg: editMsg } : v
       );
-      this.editId = '';
-      this.editMsg = '';
+      localStorage.setItem('todo', JSON.stringify(this.todo));
     },
   },
 
