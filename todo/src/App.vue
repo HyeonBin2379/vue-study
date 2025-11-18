@@ -13,9 +13,18 @@ export default {
   // todoInput으로부터 수신한 todo 메시지를 저장
   data() {
     return {
-      todo: JSON.parse(localStorage.getItem('todo')) || [], // todoInput으로부터 수신한 데이터를 저장할 todo 리스트
+      todo: [], // todoInput으로부터 수신한 데이터를 저장할 todo 리스트
       current: 'all', // todoHeader로부터 수신한 tab값을 저장
     };
+  },
+
+  created() {
+    this.todo = JSON.parse(localStorage.getItem('todo'));
+  },
+
+  updated() {
+    localStorage.setItem('todo', JSON.stringify(this.todo));
+    this.todo = JSON.parse(localStorage.getItem('todo'));
   },
 
   // todoInput으로부터 전달받은 데이터를 todoList에 전달
@@ -42,7 +51,6 @@ export default {
     deleteTodo(id) {
       console.log(id);
       this.todo = this.todo.filter((v) => v.id !== id);
-      localStorage.setItem('todo', JSON.stringify(this.todo));
     },
 
     updateTodo(id) {
@@ -51,14 +59,12 @@ export default {
         // 지정한 id에 관한 completed 속성값 변경
         v.id === id ? { ...v, completed: !v.completed } : v
       );
-      localStorage.setItem('todo', JSON.stringify(this.todo));
     },
 
     editTodo(editId, editMsg) {
       this.todo = this.todo.map((v) =>
         v.id == editId ? { ...v, msg: editMsg } : v
       );
-      localStorage.setItem('todo', JSON.stringify(this.todo));
     },
   },
 
