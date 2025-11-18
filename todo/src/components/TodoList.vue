@@ -11,6 +11,15 @@ export default {
     },
   },
 
+  data() {
+    return {
+      editId: '',
+      editMsg: ''
+    }
+  },
+
+  emits: ['edit-todo'],
+
   // 부모 컴포넌트와 통신하기 위한 함수 정의
   methods: {
     deleteTodo(id) {
@@ -19,7 +28,18 @@ export default {
 
     updateTodo(id) {
       this.$emit('update-todo', id);
-    },
+    },  
+    editTodo(id, msg) {
+      console.log(id);
+      console.log(this.editMsg);
+      this.editId = id;
+      this.editMsg = msg;
+
+      this.$emit('edit-todo', this.editId, this.editMsg);
+
+      this.editId = '';
+      this.editMsg = '';
+    }
   },
 };
 </script>
@@ -47,7 +67,15 @@ export default {
         class="todo__checkbox-label"
       ></label>
       <!-- todo 내용 출력 -->
-      <span class="todo__item-text">{{ item.msg }}</span>
+      <input type="text" v-model="editMsg" class="todo__item-text" @keydown.enter="editTodo(item.id, this.editMsg)">{{ item.msg }}</input>
+
+      <!-- 리스트에 출력된 todo를 삭제하는 버튼 -->
+      <span
+        class="material-symbols-outlined todo__edit-icon"
+        @click="editTodo(item.id, this.editMsg)"
+      >
+        edit
+      </span>
       <!-- 리스트에 출력된 todo를 삭제하는 버튼 -->
       <span
         class="material-symbols-outlined todo__delete-icon"

@@ -15,6 +15,8 @@ export default {
     return {
       todo: [], // todoInput으로부터 수신한 데이터를 저장할 todo 리스트
       current: 'all', // todoHeader로부터 수신한 tab값을 저장
+      editMsg: '',
+      editId: '',
     };
   },
 
@@ -50,6 +52,19 @@ export default {
         v.id === id ? { ...v, completed: !v.completed } : v
       );
     },
+
+    editTodo(editId, editMsg) {
+      this.editId = editId;
+      this.editMsg = editMsg;
+      console.log(this.editId);
+      console.log(this.editMsg);
+
+      this.todo = this.todo.map((v) =>
+        v.id == this.editId ? { ...v, msg: this.editMsg } : v
+      );
+      this.editId = '';
+      this.editMsg = '';
+    },
   },
 
   //  todoHeader의 tab값을 받아 todo 리스트 전송 방식을 다르게 적용
@@ -73,7 +88,12 @@ export default {
     <!-- TodoInput으로부터 전달받은 현재 todo를 todoHeader에 전달 -->
     <TodoHeader :current="current" @update-tab="updateTab" />
     <!-- todoList 컴포넌트로 computedTodo()의 반환값을 전달 -->
-    <TodoList :computed-todo="computedTodo" @delete-todo="deleteTodo" @update-todo="updateTodo"/>
+    <TodoList
+      :computed-todo="computedTodo"
+      @delete-todo="deleteTodo"
+      @update-todo="updateTodo"
+      @edit-todo="editTodo"
+    />
     <!-- v-on 디렉티브 사용 -> todoInput 컴포넌트에서 실행 -->
     <TodoInput @add-todo="addTodo" />
   </div>
