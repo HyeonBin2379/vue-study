@@ -20,22 +20,6 @@ export default {
     };
   },
 
-
-  mounted() {
-    console.log('mounted');
-    const storedData = localStorage.getItem("todo");
-    this.todo = JSON.parse(storedData);
-  },
-
-  updated() {
-    console.log('updated');
-  },
-
-  beforeDestroy() {
-    console.log('beforeUnmount');
-    localStorage.setItem('todo', JSON.stringify(this.todo));
-  },
-
   // todoInput으로부터 전달받은 데이터를 todoList에 전달
   // methods 속성의 함수: 하위 컴포넌트의 emit을 통해 발신할 데이터를 수신하는 역할을 수행
   // 즉, 부모 컴포넌트에서는 하위 컴포넌트의 emit과 연결할 methods의 함수를 연결해준다.
