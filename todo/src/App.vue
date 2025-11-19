@@ -19,7 +19,7 @@ export default {
   },
 
   created() {
-    this.todo = JSON.parse(localStorage.getItem('todo'));
+    this.todo = JSON.parse(localStorage.getItem('todo')) || [];
   },
 
   updated() {
@@ -87,7 +87,7 @@ export default {
   <!-- 컴포넌트로 렌더링할 html 요소 지정 -->
   <div class="todo">
     <!-- TodoInput으로부터 전달받은 현재 todo를 todoHeader에 전달 -->
-    <TodoHeader :current="current" @update-tab="updateTab" />
+    <TodoHeader v-bind:current="current" @update-tab="updateTab" />
     <!-- todoList 컴포넌트로 computedTodo()의 반환값을 전달 -->
     <TodoList
       :computed-todo="computedTodo"
