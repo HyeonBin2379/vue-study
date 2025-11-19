@@ -20,7 +20,7 @@ export default {
   methods: {
     // TodoInput의 emit에게서 받은 입력값으로 새로운 item 생성 후 리스트에 추가
     addTodo(inputMsg) {
-      console.log(inputMsg);
+      console.log('todo Input: ' + inputMsg);
       const item = {
         id: Math.random(),
         msg: inputMsg,
@@ -31,18 +31,37 @@ export default {
 
     // TodoFilter의 emit에게서 받은 tab으로 현재 탭을 갱신
     updateTab(tab) {
-      console.log(tab);
+      console.log('current tab: ' + tab);
       this.current = tab;
+    },
+
+    deleteTodo(id) {
+      console.log('delete Todo: ' + id);
+      this.todo = this.todo.filter((v) => v.id !== id);
+    },
+
+    updateTodo(id) {
+      console.log('update Todo: ' + id);
+      this.todo = this.todo.map((v) =>
+        v.id === id ? { ...v, done: !v.done } : v
+      );
+    },
+
+    editTodo(id, newMsg) {
+      console.log('edit Todo: ' + id);
+      this.todo = this.todo.map((v) =>
+        v.id === id ? { ...v, msg: newMsg } : v
+      );
     },
   },
 
   //
   computed: {
     computedTodo() {
-      if (current === 'active') {
+      if (this.current === 'active') {
         // 현재 탭이 '미완료'
-        return this.todo.filter((item) => !item.done);
-      } else if (current === 'done') {
+        return this.todo.filter((item) => item.done === false);
+      } else if (this.current === 'done') {
         // 현재 탭이 '완료'
         return this.todo.filter((item) => item.done);
       } else {
@@ -66,10 +85,10 @@ export default {
 <template>
   <div class="todo">
     <!-- 현재 선택된 탭은 App.vue의 data 속성인 current 값을 적용 -->
-    <TodoFilter v-bind:current="current" v-on:update-tab="updateTab" />
-    <TodoList />
+    <TodoFilter v-bind:current="current" @update-tab="updateTab" />
+    <TodoList :computed-todo="computedTodo" @edit-todo="editTodo" />
     <!-- 입력받은 내용으로 1개의 item 생성 후 리스트에 저장 -->
-    <TodoInput v-on:add-todo="addTodo" />
+    <TodoInput @add-todo="addTodo" />
   </div>
 </template>
 

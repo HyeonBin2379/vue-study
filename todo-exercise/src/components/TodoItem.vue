@@ -1,50 +1,51 @@
 <script>
 export default {
-  props: {
-    item: {
-      type: Object,
-      default() {
-        return {
-          id: this.id,
-          msg: this.newMsg,
-          done: this.newStatus,
-        }
-      }
-    }
-  },
-
   data() {
     return {
-      id: '',
       newMsg: '',
-      newStatus: false
-    }
+    };
   },
 
   emits: ['update-item', 'delete-item', 'edit-item'],
 
   methods: {
-    updateItem() {
-
+    deleteItem(id) {
+      this.$emit('delete-item', id);
     },
 
-    deleteItem() {
-
+    updateItem(id) {
+      this.item.done = !this.item.done;
+      this.$emit('update-item', id, this.item.done);
     },
 
-    editItem() {
-      this.$emit()
+    editItem(id, newMsg) {
+      this.item.msg = newMsg;
+      this.$emit('edit-item', id, newMsg);
     },
-  }
-}
+  },
+};
 </script>
 
 <template>
   <div class="todo__item">
-    <input type="checkbox" id="chk" />
-    <label for="chk" class="todo__checkbox-label"></label>
-    <span class="todo__item-text">아침먹기</span>
-    <span class="material-symbols-outlined todo__delete-icon"> delete </span>
+    <input type="checkbox" 
+      :id="`chk${item.id.toString()}`"
+      :checked="item.done" 
+      @click="updateItem"/>
+    
+      <label
+      :for="`chk${item.id.toString()}`"
+      class="todo__checkbox-label"
+    ></label>
+
+    <input type="text"
+      v-model="item.msg"
+      :id="`chk${item.id.toString()}`"
+      class="todo__item-text" 
+      @keydown.enter="editItem(this.item.id, this.item.msg)"></input>
+
+    <span class="material-symbols-outlined todo__edit-icon" @click="editItem(this.item.id, this.item.msg)"> edit </span>
+    <span class="material-symbols-outlined todo__delete-icon" @click="deleteItem(this.item.id)"> delete </span>
   </div>
 </template>
 
