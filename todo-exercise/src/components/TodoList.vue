@@ -5,6 +5,36 @@ export default {
   components: {
     TodoItem,
   },
+
+  props: {
+    computedTodo: {
+      type: Array,
+      default() {
+        return [];
+      },
+    },
+  },
+
+  data() {},
+
+  // App.vue 파일에게 지정한 데이터를 발신
+  emits: ['update-todo', 'delete-todo', 'edit-todo'],
+
+  methods: {
+    //
+    deleteTodo(id) {
+      console.log('delete target: ' + id);
+      this.computedTodo = this.computedTodo.filter((v) => v.id === id);
+    },
+
+    updateTodoStatus(id) {
+      console.log('update target: ' + id);
+    },
+
+    editTodo(id, msg) {
+      console.log('edit target: ' + id);
+    },
+  },
 };
 </script>
 

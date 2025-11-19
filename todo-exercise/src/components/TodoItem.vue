@@ -1,6 +1,41 @@
 <script>
 export default {
+  props: {
+    item: {
+      type: Object,
+      default() {
+        return {
+          id: this.id,
+          msg: this.newMsg,
+          done: this.newStatus,
+        }
+      }
+    }
+  },
 
+  data() {
+    return {
+      id: '',
+      newMsg: '',
+      newStatus: false
+    }
+  },
+
+  emits: ['update-item', 'delete-item', 'edit-item'],
+
+  methods: {
+    updateItem() {
+
+    },
+
+    deleteItem() {
+
+    },
+
+    editItem() {
+      this.$emit()
+    },
+  }
 }
 </script>
 
