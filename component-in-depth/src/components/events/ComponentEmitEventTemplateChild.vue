@@ -57,7 +57,6 @@ const emits = defineEmits({
               - 템플릿 안이라서 ref 자동 언래핑 → greet는 greet.value로 전달된다고 보면 됨.
             -->
 
-      <!-- 문제10 풀이 -->
       <button
         @click="
           greet
