@@ -4,7 +4,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '@/views/HomeView.vue';
 
 // 라우터 구성 객체 생성 및 등록: history, routes 속성값을 설정한 객체를 인자로 전달
-const _router = createRouter({
+const router = createRouter({
   history: createWebHistory(),
   routes: [
     // 정적 임포트(static import) 방식
@@ -26,3 +26,4 @@ const _router = createRouter({
 });
 
 // 생성한 라우터는 main.js에 연결 필수
+export default router;
