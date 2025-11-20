@@ -32,6 +32,7 @@ const greet = () => {
 // greet 매개변수: 자식이 올려준 문장 (payload, 데이터)
 const greetArg = (greet) => {
   // 부모의 message를 자식이 넘겨준 내용으로 갱신
+  errorMsg.value = '';
   message.value = greet;
   messages.push(`- ${greet}`);
 };
@@ -41,6 +42,7 @@ const welcomeArg = (name) => {
 };
 
 const multiArg = (payload) => {
+  errorMsg.value = '';
   message.value = `메시지: ${payload.msg}\n
   길이: ${payload.length}\n
   전송시간: ${new Date(payload.timestamp)}`;

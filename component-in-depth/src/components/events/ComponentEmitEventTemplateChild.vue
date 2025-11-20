@@ -56,17 +56,27 @@ const emits = defineEmits({
                 두 번째 인자로 greet 값을 payload로 함께 보냄.
               - 템플릿 안이라서 ref 자동 언래핑 → greet는 greet.value로 전달된다고 보면 됨.
             -->
-      <button @click="greet ? $emit('greetingArgEvent', greet) : $emit('error-event', errorMsg)">
+
+      <!-- 문제10 풀이 -->
+      <button
+        @click="
+          greet
+            ? $emit('greetingArgEvent', greet)
+            : $emit('error-event', errorMsg)
+        "
+      >
         인사해요(인자전달)
       </button>
 
       <button
         @click="
-          emits('multi-event', {
-            msg: greet,
-            timestamp: Date.now(),
-            length: greet.length,
-          })
+          greet
+            ? emits('multi-event', {
+                msg: greet,
+                timestamp: Date.now(),
+                length: greet.length,
+              })
+            : $emit('error-event', errorMsg)
         "
       >
         인사해요(객체전달)
