@@ -20,6 +20,7 @@ const userInfo = reactive({
 
 const pink = ref('pink');
 const isActive = ref(true);
+const defaultMsg = ref('안녕하세요!!');
 
 // 자식이 'greetingEvent' (또는 greeting-event) 를 emit 했을 때 실행할 함수
 // => 인자 없이, 고정된 문장을 message에 세팅
@@ -38,6 +39,17 @@ const greetArg = (greet) => {
 const welcomeArg = (name) => {
   message.value = `${name}님 환영합니다!`;
 };
+
+const multiArg = (payload) => {
+  message.value = `메시지: ${payload.msg}\n
+  길이: ${payload.length}\n
+  전송시간: ${new Date(payload.timestamp)}`;
+}
+
+const errorMsg = ref('');
+const errorEvent = (error) => {
+  errorMsg.value = error;
+}
 </script>
 
 <template>
@@ -57,13 +69,17 @@ const welcomeArg = (name) => {
           이벤트가 안 잡힐 수 있으므로  둘 다 kebab-case(소문자-하이픈)로 통일)
         -->
     <ComponentEmitEventTemplateChild
+      :defaultMsg="defaultMsg"
       :color="pink"
       :isActive="isActive"
       :user-info="userInfo"
       @greeting-event="greet"
       @greeting-arg-event="greetArg"
       @welcome-event="welcomeArg"
+      @multi-event="multiArg"
+      @error-event="errorEvent"
     />
+    <p style="color: red;">{{ errorMsg }}</p>
 
     <!-- 자식 이벤트에 의해 바뀐 message 출력 -->
     <h3>{{ message }}</h3>

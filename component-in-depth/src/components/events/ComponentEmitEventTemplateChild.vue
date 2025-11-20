@@ -1,15 +1,28 @@
 <script setup>
 // 입력값을 반응형으로 관리하기 위해 ref 사용
-import { ref } from 'vue';
+import { ref, defineEmits } from 'vue';
 
-defineProps({
+const props = defineProps({
   color: String,
   isActive: Boolean,
   userInfo: Object,
+  defaultMsg: String,
 });
 
 // greet: input과 v-model로 양방향 바인딩되는 문자열 상태
-const greet = ref('');
+const greet = ref(props.defaultMsg);
+const errorMsg = ref('입력값이 비어있습니다!');
+
+const emits = defineEmits({
+  multiEvent: {
+    msg: String,
+    timestamp: Date,
+    length: Number,
+  },
+  multiEvent: (payload) => {
+    return payload;
+  },
+});
 </script>
 
 <template>
@@ -43,8 +56,20 @@ const greet = ref('');
                 두 번째 인자로 greet 값을 payload로 함께 보냄.
               - 템플릿 안이라서 ref 자동 언래핑 → greet는 greet.value로 전달된다고 보면 됨.
             -->
-      <button @click="$emit('greetingArgEvent', greet)">
+      <button @click="greet ? $emit('greetingArgEvent', greet) : $emit('error-event', errorMsg)">
         인사해요(인자전달)
+      </button>
+
+      <button
+        @click="
+          emits('multi-event', {
+            msg: greet,
+            timestamp: Date.now(),
+            length: greet.length,
+          })
+        "
+      >
+        인사해요(객체전달)
       </button>
     </div>
 
