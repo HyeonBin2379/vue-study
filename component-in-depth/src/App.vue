@@ -2,6 +2,8 @@
 import { ref } from 'vue';
 import AppPropsLiteral from './components/props/AppPropsLiteral.vue';
 import AppPropsObject from './components/props/AppPropsObject.vue';
+import ComponentEmitEventTemplate from './components/events/ComponentEmitEventTemplate.vue';
+import ComponentEmitEventScriptSetup from './components/events/ComponentEmitEventScriptSetup.vue';
 
 const view = ref('');
 </script>
@@ -37,6 +39,14 @@ const view = ref('');
     <AppPropsObject
       v-if="view === 'object'"
       view-title="좋아하는 과일은?(Object data 전달)"
+    />
+    <ComponentEmitEventTemplate
+      v-if="view === 'template'"
+      view-title="좋아하는 과일은?(Template)"
+    />
+    <ComponentEmitEventScriptSetup
+      v-if="view === 'script'"
+      view-title="좋아하는 과일은?(Script)"
     />
   </div>
 </template>
