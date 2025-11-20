@@ -8,8 +8,9 @@ const view = ref('');
 <template>
   <div class="container">
     <TheHeading />
+
     <div class="menu">
-      <!-- 동적으로 css 스타일을 적용 -->
+      <!-- 버튼 클릭 시 동적으로 css 스타일을 적용 & view의 값 갱신 -->
       <button :class="{ active: view === 'literal' }" @click="view = 'literal'">
         Props Literal
       </button>
@@ -26,6 +27,8 @@ const view = ref('');
         Component Events (script setup)
       </button>
     </div>
+
+    <!-- 자식 컴포넌트(AppPropsLiteral.vue)에게 viewTitle을 prop으로 전달 -->
     <AppPropsLiteral v-if="view === 'literal'" view-title="좋아하는 과일은?" />
   </div>
 </template>
