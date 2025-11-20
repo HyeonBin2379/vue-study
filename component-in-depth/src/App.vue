@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import AppPropsLiteral from './components/props/AppPropsLiteral.vue';
+import AppPropsObject from './components/props/AppPropsObject.vue';
 
 const view = ref('');
 </script>
@@ -29,7 +30,14 @@ const view = ref('');
     </div>
 
     <!-- 자식 컴포넌트(AppPropsLiteral.vue)에게 viewTitle을 prop으로 전달 -->
-    <AppPropsLiteral v-if="view === 'literal'" view-title="좋아하는 과일은?" />
+    <AppPropsLiteral
+      v-if="view === 'literal'"
+      view-title="좋아하는 과일은?(Literal 전달)"
+    />
+    <AppPropsObject
+      v-if="view === 'object'"
+      view-title="좋아하는 과일은?(Object data 전달)"
+    />
   </div>
 </template>
 
