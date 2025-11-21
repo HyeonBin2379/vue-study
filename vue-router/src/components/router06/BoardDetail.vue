@@ -24,6 +24,7 @@ onMounted(() => {
     <div class="card-body">
       <h4 class="card-title">{{ articleNo }}번글 제목</h4>
       <p class="card-text">글 내용이 나와요</p>
+      <!-- name이 board6인 경로 요청 -> boardlist6으로 리다이렉트 -->
       <button
         type="button"
         @click="router.push({ name: 'board6' })"
@@ -31,6 +32,7 @@ onMounted(() => {
       >
         글목록
       </button>
+      <!-- name 속성을 사용하여 다음 경로 지정 + 다음 route의 params 속성값으로 게시글 번호 전달 -->
       <button
         type="button"
         @click="router.push({ name: 'boardmodify6', params: { no: articleNo } })"
