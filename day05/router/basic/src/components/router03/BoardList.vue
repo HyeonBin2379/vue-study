@@ -4,11 +4,11 @@
 // const router = useRouter();
 
 let articles = [
-  { articleNo: 5, subject: "5번글입니다.", registerTime: "30.12.31" },
-  { articleNo: 4, subject: "4번글입니다.", registerTime: "30.12.30" },
-  { articleNo: 3, subject: "3번글입니다.", registerTime: "30.12.29" },
-  { articleNo: 2, subject: "2번글입니다.", registerTime: "30.12.28" },
-  { articleNo: 1, subject: "1번글입니다.", registerTime: "30.12.27" },
+  { articleNo: 5, subject: '5번글입니다.', registerTime: '30.12.31' },
+  { articleNo: 4, subject: '4번글입니다.', registerTime: '30.12.30' },
+  { articleNo: 3, subject: '3번글입니다.', registerTime: '30.12.29' },
+  { articleNo: 2, subject: '2번글입니다.', registerTime: '30.12.28' },
+  { articleNo: 1, subject: '1번글입니다.', registerTime: '30.12.27' },
 ];
 </script>
 
@@ -28,8 +28,12 @@ let articles = [
         <tr v-for="article in articles" :key="article.articleNo">
           <td>{{ article.articleNo }}</td>
           <td>
-            <!-- 이름으로 라우팅 -->
-            <router-link :to="{ name: 'boardview3', params: { no: article.articleNo } }">
+            <!-- 1) :to - 라우팅할 route 객체를 속성값으로 지정 -->
+            <!-- 2) 이름으로 라우팅: 지정한 name을 갖는 route 객체로 라우팅 -->
+            <!-- 3) 찾은 route의 url 주소 파라미터로 현재 게시글 번호를 전달 -->
+            <router-link
+              :to="{ name: 'boardview3', params: { no: article.articleNo } }"
+            >
               {{ article.subject }}
             </router-link>
             <!-- <a @click="router.push({ name: 'boardview3', params: { no: article.articleNo } })">

@@ -73,6 +73,7 @@ const router = createRouter({
       component: BoardList3,
     },
     {
+      // 게시글 번호로 동적 매핑, route 등록 시 name 속성 사용
       path: "/r03/board/:no",
       name: "boardview3",
       component: BoardDetail3,
@@ -88,13 +89,18 @@ const router = createRouter({
       name: "boardview4",
       component: BoardDetail4,
     },
-    //router05
+    
+    //router05 - 중첩 라우트 방식
     {
       path: "/r05/board",
       name: "board5",
       component: TheBoardView,
+      
       // redirect: "/r05/board/list",
+      // 자식 라우터에서 부모 라우터로 리다이렉트 시, redirect 속성은 부모 라우터의 속성으로 지정
       redirect: { name: "boardlist5" },
+
+      // 라우터에 children 속성을 두어 자식 라우터를 중첩
       children: [
         {
           path: "list",
@@ -118,7 +124,8 @@ const router = createRouter({
         },
       ],
     },
-    //router06
+
+    //router06 - props 사용
     {
       path: "/r06/board",
       name: "board6",

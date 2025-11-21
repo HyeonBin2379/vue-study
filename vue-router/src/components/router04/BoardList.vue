@@ -3,6 +3,7 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 
+// 프로그래밍 방식 탐색
 function viewArticle(no) {
   router.push({ name: "boardview4", params: { no } });
 }
@@ -32,6 +33,7 @@ let articles = [
         <tr v-for="article in articles" :key="article.articleNo">
           <td>{{ article.articleNo }}</td>
           <td>
+            <!--  -->
             <a @click="viewArticle(article.articleNo)">
               {{ article.subject }}
             </a>

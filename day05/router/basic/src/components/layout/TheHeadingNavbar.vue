@@ -8,12 +8,14 @@ import DropDownIconMenuSlot from '@/components/common/DropDownIconMenuSlot.vue';
 
 const router = useRouter();
 
+// 홈 뷰에 관한 히스토리를 추가 -> 뷰를 방문할 때마다 히스토리가 추가됨
 function moveMain() {
   // router.replace({ path: "/" }); // 현재 라우트를 대체
   // router.push({ path: "/", replace: true }); // 위와 같음
   router.push({ name: 'main' }); // 새 히스토리 항목을 푸시
 }
 
+// 
 function moveBoard() {
   router.push('/r04/board');
 }
@@ -111,11 +113,13 @@ function moveBoard() {
       </div>
       <!-- 첫번째 드롭다운 메뉴 끝-->
 
-      <!-- <div class="collapse navbar-collapse" id="navbarScroll">
+      <!-- 두번째 드롭다운 메뉴 -->
+      <div class="collapse navbar-collapse" id="navbarScroll">
         <ul
           class="navbar-nav me-auto my-2 my-md-0 navbar-nav-scroll"
           style="--bs-scroll-height: 100px"
         >
+          <!-- 여기서부터 드롭다운 시작 -->
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
@@ -128,6 +132,7 @@ function moveBoard() {
             </a>
             <ul class="dropdown-menu">
               <li>
+                <!-- RouterLink를 사용하여 컴포넌트로 라우팅 -->
                 <RouterLink to="/r02/board" class="dropdown-item">
                   <DropDownIconMenuSlot>
                     <template v-slot:icon>
@@ -141,6 +146,9 @@ function moveBoard() {
           </li>
         </ul>
       </div>
+      <!-- 두번째 드롭다운 메뉴 종료 -->
+
+      <!-- 세번째 드롭다운 메뉴 -->
       <div class="collapse navbar-collapse" id="navbarScroll">
         <ul
           class="navbar-nav me-auto my-2 my-md-0 navbar-nav-scroll"
@@ -181,6 +189,9 @@ function moveBoard() {
           </li>
         </ul>
       </div>
+      <!-- 세번째 드롭다운 메뉴 종료-->
+      
+      <!-- 네번째 드롭다운 메뉴: 게시글 번호에 해당하는 게시글로 라우팅 시, 프로그래밍 방식 사용 -->
       <div class="collapse navbar-collapse" id="navbarScroll">
         <ul
           class="navbar-nav me-auto my-2 my-md-0 navbar-nav-scroll"
@@ -197,6 +208,8 @@ function moveBoard() {
               프로그래밍방식탐색
             </a>
             <ul class="dropdown-menu">
+              <!-- 드롭다운 메뉴 클릭 시, 지정한 url에 관한 히스토리를 추가하는 함수를 실행 -->
+              <!-- 홈페이지로 이동 -->
               <li>
                 <a @click="moveMain()" class="dropdown-item">
                   <DropDownIconMenuSlot>
@@ -207,6 +220,7 @@ function moveBoard() {
                   </DropDownIconMenuSlot>
                 </a>
               </li>
+              <!-- 게시글 목록(/r04/board)으로 이동 -->
               <li>
                 <a @click="moveBoard()" class="dropdown-item">
                   <DropDownIconMenuSlot>
@@ -221,6 +235,8 @@ function moveBoard() {
           </li>
         </ul>
       </div>
+      <!-- 네번째 드롭다운 메뉴 -->
+      
       <div class="collapse navbar-collapse" id="navbarScroll">
         <ul
           class="navbar-nav me-auto my-2 my-md-0 navbar-nav-scroll"
@@ -261,7 +277,8 @@ function moveBoard() {
           </li>
         </ul>
       </div>
-      <div class="collapse navbar-collapse" id="navbarScroll">
+      
+      <!-- <div class="collapse navbar-collapse" id="navbarScroll">
         <ul
           class="navbar-nav me-auto my-2 my-md-0 navbar-nav-scroll"
           style="--bs-scroll-height: 100px"

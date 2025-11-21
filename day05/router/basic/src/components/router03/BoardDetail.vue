@@ -1,14 +1,11 @@
 <script setup>
-import { useRouter, useRoute } from "vue-router";
+import { useRoute } from "vue-router";
 import { ref, onMounted } from "vue";
 
-const router = useRouter();
 const route = useRoute();
 
 let articleNo = ref(0);
 
-// dom 요소 마운트될 시, 전달받은 게시글번호를 받아 출력
-// router.push()를 사용하여 특정 게시글만 라우팅
 onMounted(() => {
   articleNo.value = route.params.no;
 });
@@ -16,20 +13,17 @@ onMounted(() => {
 
 <template>
   <div class="container text-center mt-3">
-    <h1>router04(프로그래밍 방식 탐색)</h1>
+    <h1>router03(이름이 있는 라우트)</h1>
     <div class="alert alert-info" role="alert">자유롭게 글쓰는 공간</div>
     <div class="card">
       <div class="card-body">
+        <!-- router02와 마찬가지로, 게시글 상세보기 뷰에서 게시글 번호만 변경 -->
         <h4 class="card-title">{{ articleNo }}번글 제목</h4>
         <p class="card-text">글 내용이 나와요</p>
-        <a @click="router.push({ name: 'board4' })">목록</a>
+        <router-link :to="{ name: 'board3' }">목록</router-link>
       </div>
     </div>
   </div>
 </template>
 
-<style scoped>
-a:hover {
-  cursor: pointer;
-}
-</style>
+<style scoped></style>

@@ -7,8 +7,7 @@ const route = useRoute();
 
 let articleNo = ref(0);
 
-// dom 요소 마운트될 시, 전달받은 게시글번호를 받아 출력
-// router.push()를 사용하여 특정 게시글만 라우팅
+// 뷰 컴포넌트를 마운트할 때, route를 통해 전달받은 게시글 번호로 현재 뷰 컴포넌트의 게시글 번호를 갱신
 onMounted(() => {
   articleNo.value = route.params.no;
 });

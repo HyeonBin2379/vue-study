@@ -25,6 +25,7 @@ let articles = [
           <td>{{ article.articleNo }}</td>
           <td>
             <!-- router02에 등록된 경로 /r02/board/:no를 사용하여 동적 매핑 -->
+            <!--  -->
             <router-link :to="`/r02/board/${article.articleNo}`">{{ article.subject }}</router-link>
           </td>
           <td>{{ article.registerTime }}</td>
