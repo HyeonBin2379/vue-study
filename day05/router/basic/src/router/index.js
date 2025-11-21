@@ -28,6 +28,11 @@ import BoardDetail5 from '@/components/router05/BoardDetail.vue';
 import BoardWrite5 from '@/components/router05/BoardWrite.vue';
 import BoardModify5 from '@/components/router05/BoardModify.vue';
 
+// router06
+import TheBoardView6 from '@/views/TheBoardView6.vue';
+import BoardList6 from '@/components/router06/BoardList.vue';
+import BoardDetail6 from '@/components/router06/BoardDetail.vue';
+
 // 라우팅 인스턴스 생성
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -133,6 +138,29 @@ const router = createRouter({
           path: 'modify/:no',
           name: 'boardmodify5',
           component: BoardModify5,
+        },
+      ],
+    },
+
+    //router06 - props 사용
+    {
+      path: '/r06/board',
+      name: 'board6',
+      component: TheBoardView6,
+
+      // '/r06/board'에 관한 요청 발생 시 "/r06/board/list"로 리다이렉트
+      redirect: { name: 'boardlist6' },
+      children: [
+        {
+          path: 'list',
+          name: 'boardlist6',
+          component: BoardList6,
+        },
+        {
+          path: 'view/:no',
+          name: 'boardview6',
+          component: BoardDetail6,
+          props: true,
         },
       ],
     },

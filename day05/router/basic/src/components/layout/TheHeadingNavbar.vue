@@ -15,7 +15,7 @@ function moveMain() {
   router.push({ name: 'main' }); // 새 히스토리 항목을 푸시
 }
 
-// 
+//
 function moveBoard() {
   router.push('/r04/board');
 }
@@ -190,7 +190,7 @@ function moveBoard() {
         </ul>
       </div>
       <!-- 세번째 드롭다운 메뉴 종료-->
-      
+
       <!-- 네번째 드롭다운 메뉴: 게시글 번호에 해당하는 게시글로 라우팅 시, 프로그래밍 방식 사용 -->
       <div class="collapse navbar-collapse" id="navbarScroll">
         <ul
@@ -236,7 +236,7 @@ function moveBoard() {
         </ul>
       </div>
       <!-- 네번째 드롭다운 메뉴 -->
-      
+
       <div class="collapse navbar-collapse" id="navbarScroll">
         <ul
           class="navbar-nav me-auto my-2 my-md-0 navbar-nav-scroll"
@@ -277,8 +277,8 @@ function moveBoard() {
           </li>
         </ul>
       </div>
-      
-      <!-- <div class="collapse navbar-collapse" id="navbarScroll">
+
+      <div class="collapse navbar-collapse" id="navbarScroll">
         <ul
           class="navbar-nav me-auto my-2 my-md-0 navbar-nav-scroll"
           style="--bs-scroll-height: 100px"
@@ -317,7 +317,7 @@ function moveBoard() {
             </ul>
           </li>
         </ul>
-      </div> -->
+      </div>
     </div>
   </nav>
 </template>

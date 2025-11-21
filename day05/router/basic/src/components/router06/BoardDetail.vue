@@ -7,6 +7,8 @@ const router = useRouter();
 const route = useRoute();
 
 // 부모에서 전달한 글번호를 props로 받아 자식에서 사용
+// 현재 조회한 게시글에 따라 게시글 번호, 내용, 제목을 렌더링하려면
+// 이 부분을 no:String이 아닌 article:Object로 변경하여 작성하도록 수정
 const props = defineProps({ no: String });
 
 let articleNo = ref(0);
