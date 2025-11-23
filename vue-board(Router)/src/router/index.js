@@ -4,11 +4,14 @@ import HomeView from "../views/TheHomeView.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    // 홈 뷰
     {
       path: "/",
       name: "home",
       component: HomeView,
     },
+
+    //
     {
       path: "/board",
       name: "board",
@@ -16,6 +19,8 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import("../views/AppBoardView.vue"),
+
+      // /board 요청 시 /board/list로 리다이렉트
       redirect: { name: "article-list" },
       children: [
         {

@@ -157,9 +157,11 @@ const router = createRouter({
           component: BoardList6,
         },
         {
+          // 동적 경로 지정
           path: 'view/:no',
           name: 'boardview6',
           component: BoardDetail6,
+          // route 객체에 props: true 속성 추가 -> route.params로 전달된 값을 props로 설정
           props: true,
         },
       ],

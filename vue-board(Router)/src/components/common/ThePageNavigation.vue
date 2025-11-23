@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from "vue";
 
+// 페이지 이동 관련 props, emits 지정
 const props = defineProps({ currentPage: Number, totalPage: Number });
 const emit = defineEmits(["pageChange"]);
 

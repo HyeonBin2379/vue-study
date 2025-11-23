@@ -13,9 +13,14 @@ const onSelect = () => {
 </script>
 
 <template>
+  <!-- 검색조건 콤보박스 -->
   <select v-model="key" class="form-select form-select-sm ms-5 me-1 w-50" @change="onSelect">
-    <option v-for="option in selectOption" :key="option.value" :value="option.value"
-      :disabled="option.value === '' ? true : false">
+    <option
+      v-for="option in selectOption"
+      :key="option.value"
+      :value="option.value"
+      :disabled="option.value === '' ? true : false"
+    >
       {{ option.text }}
     </option>
   </select>
